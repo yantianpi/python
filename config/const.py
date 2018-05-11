@@ -28,7 +28,7 @@ EMAIL_USER = '1262233230@qq.com'
 # email发送密码
 EMAIL_PWD = 'jxyxxmqmvbvcbach'
 # 系统异常邮件通知地址，多个地址用逗号分隔
-EMAIL_LIST = ['1262233230@qq.com', 'peteryan@meikaitech.com']
+EMAIL_LIST = ['peteryan@meikaitech.com']
 # 异常邮件通知标题
 # ——由于我们有开发环境、测试环境、预生产环境、生产环境等多个不同的环境，
 # ——所以在发送异常通知时如果区分的话，可能就弄不清是那个环境出了问题，

@@ -27,16 +27,16 @@ class dbHelperTest(unittest.TestCase):
             VALUES (%s, %s)
         """
         data = ('饼干', 1)
-        result = dbHelper.write(sql, data)
+        result = dbHelper.write(sql, data, True)
         print(result)
         # 修改不存在的记录
         sql = """
             UPDATE product_class
                SET name=%s, is_enable=%s
-            WHERE id=10000
+            WHERE id=2
         """
-        data = ('糖果', 1)
-        result = dbHelper.write(sql, data)
+        data = ('糖果', 2)
+        result = dbHelper.write(sql, data, True)
         print(result)
         # 查询记录
         sql = """

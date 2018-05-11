@@ -29,5 +29,7 @@ class encryptHelperTest(unittest.TestCase):
         print(result)
         self.assertEqual(result, 'eccbc87e4b5ce2fe28308fd9f2a7baf3')
 
+        result = encryptHelper.md5('123456').upper()
+        print(result)
 if __name__ == '__main__':
     unittest.main()

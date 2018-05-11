@@ -40,7 +40,7 @@ def read(sql):
         conn.close()
     # 返回结果（字典格式）
     return data
-def write(sql, vars):
+def write(sql, vars, returnId=False):
     """
     连接mysql数据库并进行写的操作
     如果连接失败，会把错误写入日志中，并返回false，如果sql执行失败，也会把错误写入日志中，并返回false，如果所有执行正常，则返回true
@@ -68,8 +68,12 @@ def write(sql, vars):
     else:
         # 获取数据
         try:
-            data = [dict((cursor.description[i][0], value) for i, value in enumerate(row))
+            if returnId == True:
+                data = cursor.lastrowid;
+            else:
+                data = [dict((cursor.description[i][0], value) for i, value in enumerate(row))
                          for row in cursor.fetchall()]
+
         except Exception as e:
             # 没有设置returning或执行修改或删除语句时，记录不存在
             data = None

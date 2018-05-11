@@ -69,6 +69,32 @@ class StringHelperTest(unittest.TestCase):
         print(stringHelper.cut_str('将字符串截取指定长度', 5))
         print(stringHelper.cut_str('aa将字符串截取指定长度', 5))
 
+    def test_clear_xss(self):
+        print('-----test_clear_xss------')
+        print(stringHelper.clear_xss('<script src="javascript:alert(1);">abc</script>'))
+        print(stringHelper.clear_xss('<iframe src="javascript:alert(1);">abc</iframe>'))
+        print(stringHelper.clear_xss(
+            '<div style="width:0;height:0;background:url(javascript:document.body.onload = function(){alert(/XSS/);};">div</div>'))
+        print(stringHelper.clear_xss('<img src = "#"/**/onerror = alert(/XSS/)>'))
+        print(stringHelper.clear_xss('<img src = j ava script:al er t(/XSS/)>'))
+        print(stringHelper.clear_xss("""<img src = j
+        ava script :a ler t(/xss/)>"""))
+        print(stringHelper.clear_xss('<img src="javacript:alert(\'abc\')"></img>'))
+        print(stringHelper.clear_xss('<img src="https://www.baidu.com/img/baidu_jgylogo3.gif"></img>'))
+        print(stringHelper.clear_xss('<p src="javascript:alert(1);">abc</p>'))
+        print(stringHelper.clear_xss("""<input type="text" value="琅琊榜" onclick="javascript:alert('handsome boy')">"""))
+        print(stringHelper.clear_xss('<p onclick="javascript:alert("handsome boy")>abc</p>'))
+        print(stringHelper.clear_xss('<a href="javascript:alert(1);">abc</a>'))
+        print(stringHelper.clear_xss('<a href="/api/">abc</a>'))
+        print(stringHelper.clear_xss('<a href="http://www.baidu.com">abc</a>'))
+        print(stringHelper.clear_xss('<marquee onstart="alert(/XSS/)">文字</marquee>'))
+        print(stringHelper.clear_xss('<div style="" onmouseenter="alert(/XSS/)">文字</div>'))
+        print(stringHelper.clear_xss('<li style = "TEST:e-xpression(alert(/XSS/))"></li>'))
+        print(stringHelper.clear_xss('<input id = 1 type = "text" value="" <script>alert(/XSS/)</script>"/>'))
+        print(stringHelper.clear_xss('<base href="http://www.labsecurity.org"/>'))
+        print(stringHelper.clear_xss('<div id="x">alert%28document.cookie%29%3B</div>'))
+        print(stringHelper.clear_xss('<limited_xss_point>eval(unescape(x.innerHTML));</limited_xss_point>'))
+
 
 if __name__ == '__main__':
     unittest.main()

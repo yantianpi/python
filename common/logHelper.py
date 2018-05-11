@@ -21,7 +21,7 @@ def error(content = '', is_send_mail = True):
     detailtrace = exceptHelper.detailtrace()
     content = content + '程序调用堆栈的日志：' + detailtrace + '\n'
 
-    logging.info(content)
+    logging.error(content)
 
     # 发送邮件通知相关人员
     if is_send_mail:

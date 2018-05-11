@@ -25,9 +25,11 @@ def to_datetime(dt):
         raise Exception("日期类型错误")
 
 
-def to_number():
+def to_number(format='%Y%m%d%H%M%S'):
     """当前时间转换为年月日时分秒毫秒共10位数的字符串"""
-    return datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+    if format == '':
+        format = '%Y%m%d%H%M%S'
+    return datetime.datetime.now().strftime(format)
 
 
 def to_timestamp10():

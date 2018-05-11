@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-import re
-
+import re, bleach
 
 def check_string(text, pattern):
     """
@@ -163,6 +162,18 @@ def cut_str(text, length):
             tem = text
     return tem[0:length]
 
+def clear_xss(html):
+    """
+    清除xss攻击标签
+    :param html: 要处理的html
+    :return:
+    """
+    tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'strong', 'ul']
+    tags.extend(
+        ['div', 'p', 'hr', 'br', 'pre', 'code', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'del', 'dl', 'img', 'sub', 'sup', 'u',
+         'table', 'thead', 'tr', 'th', 'td', 'tbody', 'dd', 'caption', 'blockquote', 'section'])
+    attributes = {'*': ['class', 'id'], 'a': ['href', 'title', 'target'], 'img': ['src', 'style', 'width', 'height']}
+    return bleach.linkify(bleach.clean(html, tags=tags, attributes=attributes))
 
 class IdentityCard:
     """身份证号码验证类"""
